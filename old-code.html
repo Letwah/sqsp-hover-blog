@@ -1,0 +1,39 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll(
+      "[data-current-styles*='\"customSectionHeight\": 22']"
+    );
+
+    sections.forEach((section) => {
+      const firstItem = section.querySelector(".summary-item:first-child");
+      const firstTab = section.querySelector(".tabs-heading div:first-child");
+      const tabsHeading = section.querySelector(".tabs-heading");
+
+      if (firstItem && firstTab) {
+        tabsHeading.addEventListener("mouseleave", function () {
+          // Remove current active state from any other tab
+          const activeItem = section.querySelector(".summary-item.item-active");
+          const activeTab = section.querySelector(
+            ".tabs-heading div.item-active"
+          );
+
+          if (activeItem) {
+            activeItem.classList.remove("item-active");
+            activeItem.setAttribute("aria-expanded", "false");
+          }
+          if (activeTab) {
+            activeTab.classList.remove("item-active");
+            activeTab.setAttribute("aria-selected", "false");
+          }
+
+          // Restore default active state (first tab and first item)
+          firstItem.classList.add("item-active");
+          firstItem.setAttribute("aria-expanded", "true");
+          firstTab.classList.add("item-active");
+          firstTab.setAttribute("aria-selected", "true");
+        });
+      }
+    });
+  });
+</script>
+-->
